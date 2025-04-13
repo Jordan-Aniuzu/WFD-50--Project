@@ -1,0 +1,77 @@
+TEST CASE 1: Customer Places an Order
+Objective: Verify that a user with the role Customer can place a valid order with one or more items.
+
+Steps:
+
+Login as customer_user.  
+
+- Select 2 different items from the Items table (ensure they have stock).
+
+- Create an entry in the Orders table with customer_id set to this user.
+
+- Insert matching rows in OrderItems linking to the new order.
+
+Expected Result:
+
+- The order is inserted into Orders.
+
+- Each item is correctly logged in OrderItems.
+
+- Stock is not reduced yet (unless you do that during order confirmation).
+
+
+
+
+TEST CASE 2: Inventory Manager Logs Stock Update
+Objective: Confirm that an Inventory Manager can update stock quantities for items.
+
+Steps:
+
+- Login as inventory_user.
+
+- Choose an existing item from Items table.
+
+- Submit a stock update through InventoryUpdates with new stock value.
+
+Expected Result:
+
+- New record appears in InventoryUpdates with manager_id = inventory_user.
+
+- Items.stock_quantity is optionally updated if your system reflects the change directly.
+
+
+
+
+TEST CASE 3: Admin Can View All Orders and Inventory Updates
+Objective: Ensure Admin can access all data in the system for management purposes.
+
+Steps:
+
+- Login as admin_user.
+
+- Query the full Orders, OrderItems, InventoryUpdates tables.
+
+Expected Result:
+
+- Admin can view and filter any order or inventory update regardless of user.
+
+- No permission errors or visibility limitations.
+
+
+
+
+TEST CASE 4: Luggage Handler Cannot Modify Orders or Inventory
+Objective: Test that the LuggageHandler role has limited permissions (read-only or specific actions).
+
+Steps:
+
+- Login as luggage_user.
+
+- Attempt to insert into Orders, OrderItems, or InventoryUpdates.
+
+Expected Result:
+
+- Permission denied or operation blocked.
+
+- System logs or responses confirm access is restricted.
+
